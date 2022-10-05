@@ -1,0 +1,43 @@
+{
+	"name": "node-utils",
+	"packageManager": "yarn@3.2.3",
+	"version": "0.0.1",
+	"scripts": {
+		"prepack": "tsc -p tsconfig.release.json",
+		"build": "tsc -p tsconfig.release.json",
+		"postinstall": "husky install",
+		"lint": "eslint ./src --ext .ts,.js --fix"
+	},
+	"files": [
+		"build"
+	],
+	"declaration": true,
+	"main": "build/src/index.js",
+	"types": "build/src/index.d.ts",
+	"author": "Adarsh Mishra",
+	"license": "ISC",
+	"dependencies": {
+		"device-detector-js": "^3.0.3",
+		"express": "^4.18.1",
+		"ioredis": "^5.2.3",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^6.6.1"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.14",
+		"@types/node": "^18.7.19",
+		"@typescript-eslint/eslint-plugin": "^5.38.0",
+		"@typescript-eslint/parser": "^5.38.0",
+		"eslint": "^8.24.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-sonarjs": "^0.15.0",
+		"husky": "^8.0.1",
+		"lint-staged": "^13.0.3",
+		"prettier": "^2.7.1",
+		"ts-node": "^10.9.1",
+		"typescript": "^4.8.3"
+	},
+	"description": ""
+}
