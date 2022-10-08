@@ -5,7 +5,7 @@ import DeviceDetector from 'device-detector-js';
 import { Request } from 'express';
 import jwt, { TokenExpiredError } from 'jsonwebtoken';
 
-import { TGeoData } from '../types/commonHelpers';
+import { TGeoData } from './types';
 
 /**
  * @typeParam T - Array type
@@ -290,6 +290,7 @@ export const promiseAllRecord = (
 		const entries = Object.entries(object);
 
 		entries.forEach(([key, promiseOrValue]) => {
+			if (!isPromise(promiseOrValue) && !functionToCall) throw new Error('Invalid input');
 			Promise.resolve(isPromise(promiseOrValue) ? promiseOrValue : functionToCall?.(promiseOrValue))
 				.then((result) => {
 					results[key] = result;
@@ -483,7 +484,7 @@ export const compareTimestamps = (t1: number, t2: number, diffInSec: number) => 
  */
 export const getParsedUserAgent = ({ req }: { req: Request }) => {
 	const headers = ObjectMaybe<IncomingHttpHeaders>(req.headers);
-	const userAgent = safelyParseJSON(headers.useragent?.toString() || '{}');
+	const userAgent = safelyParseJSON(headers.useragent?.toString() ?? '{}');
 	return {
 		userAgent,
 		ip: (headers['cf-connecting-ip'] as string) || (headers['x-forwarded-for'] as string),

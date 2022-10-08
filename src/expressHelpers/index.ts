@@ -13,7 +13,8 @@ import {
 	Success,
 	UnauthorizedError,
 } from '../httpResponses';
-import { IUpgradedResponse } from '../types';
+
+import { IUpgradedResponse } from './types';
 
 class UpgradedResponse<T = undefined, V = undefined> implements IUpgradedResponse<T, V> {
 	message?: string;

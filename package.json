@@ -3,17 +3,11 @@
 	"packageManager": "yarn@3.2.3",
 	"version": "0.0.1",
 	"scripts": {
-		"prepack": "tsc -p tsconfig.release.json",
+		"prepack": "tsc -p tsconfig.release.json && cp -rf ./build/src/* . && rm -rf ./build && rm -rf ./src",
 		"build": "tsc -p tsconfig.release.json",
-		"postinstall": "husky install",
 		"lint": "eslint ./src --ext .ts,.js --fix"
 	},
-	"files": [
-		"build"
-	],
 	"declaration": true,
-	"main": "build/src/index.js",
-	"types": "build/src/index.d.ts",
 	"author": "Adarsh Mishra",
 	"license": "ISC",
 	"dependencies": {
