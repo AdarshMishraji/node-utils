@@ -1,4 +1,4 @@
-import Redis, { RedisKey } from 'ioredis';
+import Redis, { RedisKey, RedisOptions } from 'ioredis';
 
 import { isEmptyObject, safelyParseJSON } from '../commonHelpers';
 
@@ -6,12 +6,14 @@ export const redisConnection = ({
 	redisHost,
 	redisPort,
 	redisDB,
+	options = {},
 }: {
 	redisHost: string;
 	redisPort: number;
 	redisDB: number;
+	options: Partial<RedisOptions>;
 }): Redis => {
-	const client = new Redis(redisPort, redisHost, { db: redisDB });
+	const client = new Redis(redisPort, redisHost, { db: redisDB, ...options });
 
 	client.on('connect', () => console.log('Redis client connected'));
 
@@ -187,3 +189,5 @@ export const zRemAsync = ({ client, key, member }: { client: Redis; key: RedisKe
 	client.zrem(key, member);
 
 export const zCardAsync = ({ client, key }: { client: Redis; key: RedisKey }) => client.zcard(key);
+
+export { Redis };

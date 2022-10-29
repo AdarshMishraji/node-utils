@@ -65,12 +65,18 @@ export const createSessionTransaction = async <T>(transaction: (session: ClientS
 			dataReturned = await transaction(_);
 		});
 		await session.endSession();
-		return dataReturned;
+		return dataReturned as T;
 	} catch (error) {
 		await session.abortTransaction();
 		await session.endSession();
 		throw error;
 	}
+};
+
+export const MongoObjectId = (id: string | mongoose.Types.ObjectId | undefined, ifNotValidIdGenerateNew = false) => {
+	if (id && mongoose.Types.ObjectId.isValid(id)) return new mongoose.Types.ObjectId(id);
+	if (ifNotValidIdGenerateNew) return new mongoose.Types.ObjectId();
+	return undefined;
 };
 
 export { mongoose };

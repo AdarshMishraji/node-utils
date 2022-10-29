@@ -1,7 +1,7 @@
 {
 	"name": "node-utils",
 	"packageManager": "yarn@3.2.3",
-	"version": "0.0.1",
+	"version": "0.0.3",
 	"scripts": {
 		"prepack": "tsc -p tsconfig.release.json && cp -rf ./build/src/* . && rm -rf ./build && rm -rf ./src",
 		"build": "tsc -p tsconfig.release.json",
